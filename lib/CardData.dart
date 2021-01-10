@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:bmi_calculator/Constants.dart';
+
 
 class GenderCardWidget extends StatelessWidget {
   final IconData icon;
@@ -14,7 +16,7 @@ class GenderCardWidget extends StatelessWidget {
       children: [
         Icon(icon,size: 80,color: Colors.white,),
         SizedBox(height: 15.0,),
-        Text(text,style: TextStyle(fontSize: 18.0,color: Color(0xFF8D8E98)),)
+        Text(text,style: klabelTextStyle),
       ],
     );
   }

@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/ResusanleCards.dart';
 import 'package:bmi_calculator/CardData.dart';
-
-const double buttomBarHeight = 70;
-const Color activeCardColor = Color(0xFF1D1E33);
+import 'package:bmi_calculator/Constants.dart';
+enum Gender{
+  male,
+  female
+}
 
 class InputPage extends StatefulWidget {
   @override
@@ -12,6 +14,24 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
+
+
+
+  Color maleCardColor = kinActiveCardColor;
+  Color femaleCardColor = kinActiveCardColor;
+  Gender selectedGender ;
+
+  int height = 180;
+
+
+   void changeGender(Gender gen){
+
+     maleCardColor = (gen == Gender.male)? kactiveCardColor : kinActiveCardColor;
+     femaleCardColor = (gen == Gender.female)? kactiveCardColor : kinActiveCardColor;
+
+     selectedGender = gen;
+   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,28 +44,71 @@ class _InputPageState extends State<InputPage> {
               child: Row(
                 children: [
                   Expanded(child:ReusableCard(
-                    cl: activeCardColor,
+                    cl: maleCardColor,
                     cardchild: GenderCardWidget(icon: FontAwesomeIcons.male,text: 'MALE',),
+                    Instruction: (){
+                      setState(() {
+                        changeGender(Gender.male);
+                      });},
                   ),),
                   Expanded(child:ReusableCard(
-                    cl: activeCardColor,
+                    cl: femaleCardColor,
                     cardchild: GenderCardWidget(icon: FontAwesomeIcons.female, text: "FEMALE"),
+                    Instruction: (){
+                      setState(() {
+                        changeGender(Gender.female);
+                      });},
                   ),),
                 ],),
             ),
-            Expanded(child:ReusableCard(cl: activeCardColor,),),
+            Expanded(child:ReusableCard(
+              cl: kactiveCardColor,
+              cardchild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Text('Height',style: klabelTextStyle,),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(height.toString(),style: knumberTextStyle,),
+                      SizedBox(width: 10.0,),
+                      Text('cm', style: klabelTextStyle,),
+                    ],),
+                  SliderTheme(
+                    data: SliderTheme.of(context).copyWith(
+                      trackHeight: 1.0,
+                      activeTrackColor: Colors.white,
+                      inactiveTrackColor: kfontcolor,
+                      thumbColor: kacentcolor,
+                      thumbShape: RoundSliderThumbShape(enabledThumbRadius: 15.0),
+                      overlayShape: RoundSliderOverlayShape(overlayRadius: 30),
+                      overlayColor: kacentcolor.withAlpha(100),
+                    ),
+                    child: Slider(
+                      value: height.toDouble(),
+                      min: 120,
+                      max: 220,
+
+                      onChanged: (double newValue){
+                        setState(() {
+                          height = newValue.toInt();
+                        });},),
+                  ),
+                ],
+              ),
+            ),),
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child:ReusableCard(cl: activeCardColor,),),
-                  Expanded(child:ReusableCard(cl: activeCardColor,),),
+                  Expanded(child:ReusableCard(cl: kactiveCardColor,),),
+                  Expanded(child:ReusableCard(cl: kactiveCardColor,),),
                 ],),
             ),
             Container(
-              color: Color(0xFFeB1555),
+              color: kacentcolor,
               margin: EdgeInsets.only(top:10),
               width: double.infinity,
-              height: buttomBarHeight,
+              height: kbuttomBarHeight,
             ),
           ],),
     );
