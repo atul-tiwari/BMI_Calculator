@@ -23,3 +23,30 @@ class ReusableCard extends StatelessWidget {
     );
   }
 }
+
+class CustomRoundButton extends StatelessWidget {
+
+  final IconData iconData;
+  final Function onPressed;
+
+  const CustomRoundButton({
+    Key key ,@required this.iconData,this.onPressed,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(8.0),
+      child: RawMaterialButton(
+        elevation: 6.0,
+        constraints: BoxConstraints.tightFor(width: 50,height: 50),
+        shape: CircleBorder(),
+        fillColor: Color(0xFF4C4F5E),
+        child: Icon(iconData , color: Colors.white,),
+        onPressed: this.onPressed,
+
+      ),
+    );
+  }
+}
+

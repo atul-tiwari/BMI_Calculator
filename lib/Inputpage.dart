@@ -3,6 +3,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:bmi_calculator/ResusanleCards.dart';
 import 'package:bmi_calculator/CardData.dart';
 import 'package:bmi_calculator/Constants.dart';
+import 'package:bmi_calculator/ResultPage.dart';
+
 enum Gender{
   male,
   female
@@ -22,7 +24,8 @@ class _InputPageState extends State<InputPage> {
   Gender selectedGender ;
 
   int height = 180;
-
+  int weight = 60;
+  int age = 18;
 
    void changeGender(Gender gen){
 
@@ -88,7 +91,6 @@ class _InputPageState extends State<InputPage> {
                       value: height.toDouble(),
                       min: 120,
                       max: 220,
-
                       onChanged: (double newValue){
                         setState(() {
                           height = newValue.toInt();
@@ -100,15 +102,62 @@ class _InputPageState extends State<InputPage> {
             Expanded(
               child: Row(
                 children: [
-                  Expanded(child:ReusableCard(cl: kactiveCardColor,),),
-                  Expanded(child:ReusableCard(cl: kactiveCardColor,),),
+                  Expanded(child:ReusableCard(
+                    cl: kactiveCardColor,
+                    cardchild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('WEIGHT',style: klabelTextStyle,),
+                        Text(weight.toString(), style: knumberTextStyle,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                          CustomRoundButton(iconData: FontAwesomeIcons.minus ,
+                          onPressed: (){
+                            setState(() {
+                              weight--;});},),
+                          CustomRoundButton(iconData: FontAwesomeIcons.plus,
+                          onPressed: (){
+                            setState(() {
+                              weight++;
+                            });},),],)
+                      ],),
+                  ),),
+                  Expanded(child:ReusableCard(
+                    cl: kactiveCardColor,
+                    cardchild: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text('AGE',style: klabelTextStyle,),
+                        Text(age.toString(), style: knumberTextStyle,),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CustomRoundButton(iconData: FontAwesomeIcons.minus ,
+                              onPressed: (){
+                                setState(() {
+                                  age--;});},),
+                            CustomRoundButton(iconData: FontAwesomeIcons.plus,
+                              onPressed: (){
+                                setState(() {
+                                  age++;
+                                });},),],)
+                      ],),
+                  ),),
                 ],),
             ),
-            Container(
-              color: kacentcolor,
-              margin: EdgeInsets.only(top:10),
-              width: double.infinity,
-              height: kbuttomBarHeight,
+            GestureDetector(
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage() ,), );
+              },
+              child: Container(
+                alignment: Alignment.center,
+                color: kacentcolor,
+                margin: EdgeInsets.only(top:10),
+                width: double.infinity,
+                height: kbuttomBarHeight,
+                child: Text('CALCULATE' , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w600)),
+              ),
             ),
           ],),
     );
