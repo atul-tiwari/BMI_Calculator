@@ -146,19 +146,9 @@ class _InputPageState extends State<InputPage> {
                   ),),
                 ],),
             ),
-            GestureDetector(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage() ,), );
-              },
-              child: Container(
-                alignment: Alignment.center,
-                color: kacentcolor,
-                margin: EdgeInsets.only(top:10),
-                width: double.infinity,
-                height: kbuttomBarHeight,
-                child: Text('CALCULATE' , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w600)),
-              ),
-            ),
+            ResButton(text: 'CALCULATE',onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => ResultPage() ,), );
+            },),
           ],),
     );
   } 

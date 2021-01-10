@@ -49,4 +49,28 @@ class CustomRoundButton extends StatelessWidget {
     );
   }
 }
+class ResButton extends StatelessWidget {
+
+  final String text;
+  final Function onTap;
+  const ResButton({
+    Key key,@required this.text,@required this.onTap,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Container(
+        alignment: Alignment.center,
+        color: kacentcolor,
+        margin: EdgeInsets.only(top:10),
+        width: double.infinity,
+        height: kbuttomBarHeight,
+        child: Text(text , style: TextStyle(fontSize: 25 , fontWeight: FontWeight.w600)),
+      ),
+    );
+  }
+}
+
 
